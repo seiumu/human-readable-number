@@ -18,15 +18,15 @@ module.exports = function toReadable(number) {
       "fifteen",
       "sixteen",
       "seventeen",
-      "eightteen",
-      "ninetineen",
+      "eighteen",
+      "nineteen",
       "twenty",
   ];
   const tens = [
       "ten",
       "twenty",
       "thirty",
-      "fourty",
+      "forty",
       "fifty",
       "sixty",
       "seventy",
@@ -46,22 +46,28 @@ module.exports = function toReadable(number) {
         if (isNaN(a)) {
             a = "";
         } else {
-            a = upTo20[a] + " hundred ";
+            a = upTo20[a] + " hundred";
         }
-
+		var copyb = b;
+      	var copyc = c;
         if (b === 0 || isNaN(b)) {
             b = "";
-        } else {
-            b = tens[b-1] + " ";
+        } else if (a === ""){
+            b = tens[b - 1];
+        } else{
+            b = " " + tens[b - 1];
         }
 
         if (c === 0) {
             c = "";
-            b = b.slice(0, -1);
         } else {
-            c = upTo20[c];
+            c = " " + upTo20[c];
         }
-
+        
+        if (copyb === 1) {
+          b = " " + upTo20[copyb*10+copyc];
+          c = "";
+        } else{} 
         var result = a + b + c;
         console.log(result);
         return result;
